@@ -25,7 +25,7 @@ def get_alpha_vantage_key() -> str:
         )
     return key
 
-#Fetch daily OHLCV data for a crypto coin from Alpha Vantage API, used in Project Crypto-Analysis
+#Fetch daily OHLCV data Alpha Vantage API, used in Project Crypto-Analysis
 def get_crypto_daily(symbol: str, market: str = "USD") -> dict:
     url = "https://www.alphavantage.co/query"
     params = {
@@ -51,3 +51,14 @@ def get_crypto_daily(symbol: str, market: str = "USD") -> dict:
             f"Information for {symbol}: {data['Information']}"
         )
     return data
+
+def get_multiple_crypto(symbols: list, market: str = "USD") -> dict: 
+    results = {}
+    for symbol in symbols:
+        print(f"  Fetching {symbol}...", end=" ")
+        try:
+            results[symbol] = get_crypto_daily(symbol, market)
+            print("Done.")
+        except Exception as e:
+            print(f"Error fetching {symbol}: {e}")
+    return results
