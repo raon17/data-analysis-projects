@@ -23,12 +23,10 @@ def check_for_api_errors(data: dict, symbol: str) -> None:
         raise ValueError(
             f"\n request rejected for {symbol}"
         )
-
     if "Note" in data:
         raise RuntimeError(
             f"\n Limit hit fetching {symbol}."
         )
-
     if "Information" in data:
         raise RuntimeError(
             f"\nℹ Returned an info message for {symbol}:"
@@ -58,5 +56,5 @@ def fetch_coins(symbols: list, market: str = "USD") -> dict:
             print("Good")
         except Exception as e:
             print(f"\n{e}")
-    print(f"\n  complete - fetched {len(results)}/{len(symbols)} coins.")
+    print(f"\n  complete - fetched {len(results)}/{len(symbols)} coins")
     return results
